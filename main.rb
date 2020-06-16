@@ -37,6 +37,14 @@ module Enumerable
     end
     true
   end
+
+  def my_any?
+    return to_enum unless block_given?
+
+    my_each { |item| return true if yield(item) }
+    false
+  end
+
 end
 
 # [2, 5, 6, 7].my_each do |n|
@@ -59,8 +67,10 @@ end
 #   n > 5
 # end
 
-result = [2, 4, 6, 7, 8, 4].my_all? do |n|
-  n < 6
-end
+# result = [2, 4, 6, 7, 8, 4].my_all? do |n|
+#   n < 6
+# end
 
-p result
+# p result
+
+p [4,5,6].my_any?{ |n| n<3 }
