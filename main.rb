@@ -28,6 +28,15 @@ module Enumerable
     my_each { |item| new_arr << item if yield(item) }
     new_arr
   end
+
+  def my_all?
+    return to_enum unless block_given?
+
+    my_each do |item|
+      return false if yield(item) == false
+    end
+    true
+  end
 end
 
 # [2, 5, 6, 7].my_each do |n|
@@ -50,5 +59,8 @@ end
 #   n > 5
 # end
 
-# p result
+result = [2, 4, 6, 7, 8, 4].my_all? do |n|
+  n < 6
+end
 
+p result
