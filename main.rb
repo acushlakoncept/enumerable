@@ -46,12 +46,11 @@ module Enumerable
   end
 
   def my_none?
-    return to_enum unless block_given? 
+    return to_enum unless block_given?
 
     my_any? { |item| return false if yield(item) }
     true
   end
-
 end
 
 # [2, 5, 6, 7].my_each do |n|
@@ -80,4 +79,4 @@ end
 
 # p [4,5,6].my_any?{ |n| n<3 }
 
-p [4,5,6].my_none?{ |n| n > 5 }
+[4, 5, 6].my_none? { |n| n > 5 }
