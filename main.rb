@@ -51,6 +51,20 @@ module Enumerable
     my_any? { |item| return false if yield(item) }
     true
   end
+
+  def my_count(num = nil)
+    arr = self.class == Array ? self : to_a
+    return arr.length unless block_given? || num
+
+    count = 0
+    if num
+      my_each{ |item| count += 1 if item == num}
+    else
+      my_each { |item| count += 1 if yield(item) }
+    end
+
+    count
+  end
 end
 
 # [2, 5, 6, 7].my_each do |n|
@@ -79,4 +93,7 @@ end
 
 # p [4,5,6].my_any?{ |n| n<3 }
 
-[4, 5, 6].my_none? { |n| n > 5 }
+# [4, 5, 6].my_none? { |n| n > 5 }
+
+p [2,3,56, 6, 3,2,9,1,2,3,3,5].my_count(2)
+p (0..5).my_count(2) 
