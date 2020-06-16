@@ -58,12 +58,20 @@ module Enumerable
 
     count = 0
     if num
-      my_each{ |item| count += 1 if item == num}
+      my_each { |item| count += 1 if item == num }
     else
       my_each { |item| count += 1 if yield(item) }
     end
 
     count
+  end
+
+  def my_map
+    return to_enum unless block_given?
+
+    new_arr = []
+    my_each { |item| new_arr << yield(item) }
+    new_arr
   end
 end
 
@@ -95,5 +103,8 @@ end
 
 # [4, 5, 6].my_none? { |n| n > 5 }
 
-p [2,3,56, 6, 3,2,9,1,2,3,3,5].my_count(2)
-p (0..5).my_count(2) 
+# p [2,3,56, 6, 3,2,9,1,2,3,3,5].my_count(2)
+# p (0..5).my_count(2)
+
+# (0..5).my_map { |i| i * i }
+# [2, 5, 7, 4, 2].my_map { |i| i + 8 }
