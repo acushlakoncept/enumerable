@@ -23,11 +23,11 @@ module Enumerable
 
   def my_select
     return to_enum unless block_given?
+
     new_arr = []
     my_each { |item| new_arr << item if yield(item) }
     new_arr
   end
-
 end
 
 # [2, 5, 6, 7].my_each do |n|
@@ -46,5 +46,9 @@ end
 #   puts i.to_s + ': ' + n.to_s
 # end
 
+# result = [2, 5, 6, 7].my_select do |n|
+#   n > 5
+# end
 
-p [2, 5, 6, 7].my_select { |n| n > 5 }
+# p result
+
