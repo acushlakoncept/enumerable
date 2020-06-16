@@ -128,4 +128,4 @@ end
 # (0..5).my_map { |i| i * i }
 # [2, 5, 7, 4, 2].my_map { |i| i + 8 }
 
-p (1..5).my_inject(3) { |result, element| result * element }
+p (1..5).my_inject(1) { |result, element| result * element }
