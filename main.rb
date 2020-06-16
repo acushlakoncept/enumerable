@@ -73,6 +73,25 @@ module Enumerable
     my_each { |item| new_arr << yield(item) }
     new_arr
   end
+
+  def my_inject(num = 0)
+    return to_enum unless block_given? || num
+
+    accumulator = 0
+
+    if num
+      accumulator = num
+      my_each do |item|
+        accumulator = yield(accumulator, item) 
+      end
+    else
+      my_each do |item|
+        accumulator = yield(accumulator, item) 
+      end
+    end
+
+    accumulator
+  end
 end
 
 # [2, 5, 6, 7].my_each do |n|
@@ -108,3 +127,5 @@ end
 
 # (0..5).my_map { |i| i * i }
 # [2, 5, 7, 4, 2].my_map { |i| i + 8 }
+
+p (1..5).my_inject(3) { |result, element| result * element }
