@@ -135,10 +135,10 @@ end
 p result
 
 puts 'my_any'
-p [4, 5, 6].my_any? { |n| n < 3 }
+p([4, 5, 6].my_any? { |n| n < 3 })
 
 puts 'my_none'
-p [4, 5, 6].my_none? { |n| n > 5 }
+p([4, 5, 6].my_none? { |n| n > 5 })
 
 puts 'my_count Array'
 p [2, 3, 56, 6, 3, 2, 9, 1, 2, 3, 3, 5].my_count(2)
@@ -150,17 +150,17 @@ puts 'my_map Range'
 p(0..5).my_map { |i| i * i }
 
 puts 'my_map Array'
-p [2, 5, 7, 4, 2].my_map { |i| i + 8 }
+p([2, 5, 7, 4, 2].my_map { |i| i + 8 })
 
 puts 'my_map proc'
 my_proc = proc { |i| i * i }
 p [2, 5, 7, 4, 2].my_map(&my_proc)
 
 puts 'my_inject Range'
-p(5..10).my_inject(1) { |result, element| result + element }
+p(5..10).my_inject(1) { |x, y| x + y }
 
 puts 'my_inject Array'
-p [5, 5, 7, 8].my_inject(1) { |result, element| result * element }
+p [5, 5, 7, 8].my_inject(1) { |x, y| x * y }
 
 puts 'multiply_els'
 p multiply_els([2, 4, 5])
