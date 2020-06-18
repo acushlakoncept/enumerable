@@ -82,17 +82,24 @@ module Enumerable
     if num
       accumulator = num
       my_each do |item|
-        accumulator = yield(accumulator, item) 
+        accumulator = yield(accumulator, item)
       end
     else
       my_each do |item|
-        accumulator = yield(accumulator, item) 
+        accumulator = yield(accumulator, item)
       end
     end
+  
 
     accumulator
   end
+
+
+  def multiply_els(arr)
+    arr.my_inject { |result, element| result * element }
+  end
 end
+
 
 # [2, 5, 6, 7].my_each do |n|
 #   puts n
@@ -125,7 +132,9 @@ end
 # p [2,3,56, 6, 3,2,9,1,2,3,3,5].my_count(2)
 # p (0..5).my_count(2)
 
-# (0..5).my_map { |i| i * i }
-# [2, 5, 7, 4, 2].my_map { |i| i + 8 }
+# p (0..5).my_map { |i| i * i }
+# p [2, 5, 7, 4, 2].my_map { |i| i + 8 }
 
-p (1..5).my_inject(1) { |result, element| result * element }
+# p (5..10).my_inject(1) { |result, element| result + element }
+# p [5,5,7,8].my_inject(1) { |result, element| result * element }
+puts multiply_els([2, 4, 5])
