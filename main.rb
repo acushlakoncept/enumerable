@@ -70,7 +70,7 @@ module Enumerable
     return to_enum unless block_given? || proc
 
     new_arr = []
-    if(proc)
+    if proc
       my_each { |item| new_arr << proc.call(item) }
     else
       my_each { |item| new_arr << yield(item) }
@@ -93,56 +93,74 @@ module Enumerable
         accumulator = yield(accumulator, item)
       end
     end
-  
 
     accumulator
   end
-
 end
 
 def multiply_els(arr)
   arr.my_inject(1) { |result, element| result * element }
 end
 
+puts 'my_each Array'
+[2, 5, 6, 7].my_each do |n|
+  puts n
+end
 
-# [2, 5, 6, 7].my_each do |n|
-#   puts n
-# end
+puts 'my_each Range'
+(1..5).my_each do |n|
+  puts n
+end
 
-# (1..5).my_each do |n|
-#   puts n
-# end
+puts 'my_each_with_index Array'
+[2, 5, 6, 7].my_each_with_index do |n, i|
+  puts i.to_s + ': ' + n.to_s
+end
 
-# [2, 5, 6, 7].my_each_with_index do |n, i|
-#   puts i.to_s + ': ' + n.to_s
-# end
+puts 'my_each_with_index Range'
+(1..5).my_each_with_index do |n, i|
+  puts i.to_s + ': ' + n.to_s
+end
 
-# (1..5).my_each_with_index do |n, i|
-#   puts i.to_s + ': ' + n.to_s
-# end
+puts 'my_select'
+result = [2, 5, 6, 7].my_select do |n|
+  n > 5
+end
+p result
 
-# result = [2, 5, 6, 7].my_select do |n|
-#   n > 5
-# end
+puts 'my_all'
+result = [2, 4, 6, 7, 8, 4].my_all? do |n|
+  n < 9
+end
+p result
 
-# result = [2, 4, 6, 7, 8, 4].my_all? do |n|
-#   n < 6
-# end
+puts 'my_any'
+p [4, 5, 6].my_any? { |n| n < 3 }
 
-# p [4,5,6].my_any?{ |n| n<3 }
+puts 'my_none'
+p [4, 5, 6].my_none? { |n| n > 5 }
 
-# [4, 5, 6].my_none? { |n| n > 5 }
+puts 'my_count Array'
+p [2, 3, 56, 6, 3, 2, 9, 1, 2, 3, 3, 5].my_count(2)
 
-# p [2,3,56, 6, 3,2,9,1,2,3,3,5].my_count(2)
-# p (0..5).my_count(2)
+puts 'my_count Range'
+p (0..5).my_count(2)
 
-# p (0..5).my_map { |i| i * i }
-# p [2, 5, 7, 4, 2].my_map { |i| i + 8 }
+puts 'my_map Range'
+p(0..5).my_map { |i| i * i }
 
-my_proc = Proc.new { |i| i * i }
+puts 'my_map Array'
+p [2, 5, 7, 4, 2].my_map { |i| i + 8 }
+
+puts 'my_map proc'
+my_proc = proc { |i| i * i }
 p [2, 5, 7, 4, 2].my_map(&my_proc)
 
-# p (5..10).my_inject(1) { |result, element| result + element }
-# p [5,5,7,8].my_inject(1) { |result, element| result * element }
+puts 'my_inject Range'
+p(5..10).my_inject(1) { |result, element| result + element }
 
-# p multiply_els([2, 4, 5])
+puts 'my_inject Array'
+p [5, 5, 7, 8].my_inject(1) { |result, element| result * element }
+
+puts 'multiply_els'
+p multiply_els([2, 4, 5])
