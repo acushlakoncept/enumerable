@@ -1,14 +1,28 @@
 # Enumerable
 
-Enumerable methods
+This is the first project that welcomes us challenges us into recreated our own enumerable methods for ruby this is the second Ruby section of the *Microverse Remote Software Development Curriculum*.
+
+Bellow are a list of methods we had to recreate.
+
+### Enumerable Methods List:
+
+- my_each
+- my_each_with_index
+- my_select
+- my_all?
+- my_any?
+- my_none?
+- my_count
+- my_map
+- my_inject
+- multiply_els
 
 ## Built With
 
 - Ruby
 
 ## Live Code
-[Live Solution](#)
-
+[Solution](https://repl.it/@jacobrees24/enumerable#main.rb)
 
 
 ## Getting Started
@@ -20,7 +34,7 @@ $ cd <folder>
 ```
 
 ```
-$ git clone https://github.com/acushlakoncept/enumerable.git
+$ git clone https://github.com/jacobrees/Bubble-Sort.git
 ```
 
 ## Authors
@@ -40,8 +54,6 @@ $ git clone https://github.com/acushlakoncept/enumerable.git
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
-
-Feel free to check the [issues page](https://github.com/acushlakoncept/enumerable/issues).
 
 
 ## Show your support
