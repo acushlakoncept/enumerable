@@ -66,11 +66,15 @@ module Enumerable
     count
   end
 
-  def my_map
-    return to_enum unless block_given?
+  def my_map(proc = nil)
+    return to_enum unless block_given? || proc
 
     new_arr = []
-    my_each { |item| new_arr << yield(item) }
+    if(proc)
+      my_each { |item| new_arr << proc.call(item) }
+    else
+      my_each { |item| new_arr << yield(item) }
+    end
     new_arr
   end
 
@@ -135,7 +139,10 @@ end
 # p (0..5).my_map { |i| i * i }
 # p [2, 5, 7, 4, 2].my_map { |i| i + 8 }
 
+my_proc = Proc.new { |i| i * i }
+p [2, 5, 7, 4, 2].my_map(&my_proc)
+
 # p (5..10).my_inject(1) { |result, element| result + element }
 # p [5,5,7,8].my_inject(1) { |result, element| result * element }
 
-p multiply_els([2, 4, 5])
+# p multiply_els([2, 4, 5])
