@@ -117,16 +117,14 @@ puts 'my_each_with_index Range'
 end
 
 puts 'my_select'
-result = [2, 5, 6, 7].my_select do |n|
+[2, 5, 6, 7].my_select do |n|
   n > 5
 end
 
-
 puts 'my_all'
-result = [2, 4, 6, 7, 8, 4].my_all? do |n|
+[2, 4, 6, 7, 8, 4].my_all? do |n|
   n < 9
 end
-
 
 puts 'my_any'
 ([4, 5, 6].my_any? { |n| n < 3 })
