@@ -22,7 +22,7 @@ module Enumerable
   end
 
   def my_select
-    return to_enum unless block_given?
+    return to_enum(:my_select) unless block_given?
 
     new_arr = []
     my_each { |item| new_arr << item if yield(item) }
@@ -30,7 +30,7 @@ module Enumerable
   end
 
   def my_all?
-    return to_enum unless block_given?
+    return to_enum(:my_all?) unless block_given?
 
     my_each do |item|
       return false if yield(item) == false
@@ -39,14 +39,14 @@ module Enumerable
   end
 
   def my_any?
-    return to_enum unless block_given?
+    return to_enum(:my_any?) unless block_given?
 
     my_each { |item| return true if yield(item) }
     false
   end
 
   def my_none?
-    return to_enum unless block_given?
+    return to_enum(:my_none?) unless block_given?
 
     my_any? { |item| return false if yield(item) }
     true
@@ -74,7 +74,7 @@ module Enumerable
   end
 
   def my_inject(num = 0)
-    return to_enum unless block_given? || num
+    return to_enum(:my_inject) unless block_given? || num
 
     if num
       accumulator = num
