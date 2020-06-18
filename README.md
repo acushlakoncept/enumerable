@@ -1,6 +1,6 @@
 # Enumerable
 
-This is the first project that welcomes us challenges us into recreated our own enumerable methods for ruby this is the second Ruby section of the *Microverse Remote Software Development Curriculum*.
+This is the first project that challenges us into recreating our own enumerable methods using Ruby this is the second Ruby section of the *Microverse Remote Software Development Curriculum*.
 
 Below are a list of methods we had to recreate.
 
