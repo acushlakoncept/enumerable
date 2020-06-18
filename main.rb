@@ -135,13 +135,21 @@ puts 'my_none'
 ([4, 5, 6].my_none? { |n| n > 5 })
 
 puts 'my_count Array'
+<<<<<<< HEAD
 [2, 3, 56, 6, 3, 2, 9, 1, 2, 3, 3, 5].my_count(3)
+=======
+p [2, 3, 56, 6, 3, 2, 9, 1, 2, 3, 3, 5].my_count(3)
+>>>>>>> 9ac0c0278e8dab7bc342ad6ee6fd0931b63c00e4
 
 puts 'my_count Range'
 (0..5).my_count(2)
 
 puts 'my_map Range'
+<<<<<<< HEAD
 ((0..5).my_map { |i| i * i })
+=======
+p((0..5).my_map { |i| i * i })
+>>>>>>> 9ac0c0278e8dab7bc342ad6ee6fd0931b63c00e4
 
 puts 'my_map Array'
 ([2, 5, 7, 4, 2].my_map { |i| i + 8 })
@@ -151,7 +159,11 @@ my_proc = proc { |i| i * i }
 [2, 5, 7, 4, 2].my_map(&my_proc)
 
 puts 'my_inject Range'
+<<<<<<< HEAD
 ((5..10).my_inject { |x, y| x + y })
+=======
+puts((5..10).my_inject { |x, y| x + y })
+>>>>>>> 9ac0c0278e8dab7bc342ad6ee6fd0931b63c00e4
 
 puts 'my_inject Array'
 [5, 5, 7, 8].my_inject(1) { |x, y| x * y }
