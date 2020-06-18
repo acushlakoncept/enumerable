@@ -59,10 +59,10 @@ module Enumerable
     count = 0
     if num
       my_each { |item| count += 1 if item == num }
-    else
-      my_each { |item| count += 1 if yield(item) }
+      return count
     end
 
+    my_each { |item| count += 1 if yield(item) }
     count
   end
 
@@ -81,20 +81,19 @@ module Enumerable
   def my_inject(num = 0)
     return to_enum unless block_given? || num
 
-    accumulator = 0
-
     if num
       accumulator = num
       my_each do |item|
         accumulator = yield(accumulator, item)
       end
-    else
-      my_each do |item|
-        accumulator = yield(accumulator, item)
-      end
+      return accumulator
     end
 
-    accumulator
+    sum = 0
+    my_each do |item|
+      sum = yield(sum, item)
+    end
+    sum
   end
 end
 
@@ -141,13 +140,13 @@ puts 'my_none'
 p([4, 5, 6].my_none? { |n| n > 5 })
 
 puts 'my_count Array'
-p [2, 3, 56, 6, 3, 2, 9, 1, 2, 3, 3, 5].my_count(2)
+p [2, 3, 56, 6, 3, 2, 9, 1, 2, 3, 3, 5].my_count(3)
 
 puts 'my_count Range'
 p (0..5).my_count(2)
 
 puts 'my_map Range'
-p(0..5).my_map { |i| i * i }
+p((0..5).my_map { |i| i * i })
 
 puts 'my_map Array'
 p([2, 5, 7, 4, 2].my_map { |i| i + 8 })
@@ -157,7 +156,7 @@ my_proc = proc { |i| i * i }
 p [2, 5, 7, 4, 2].my_map(&my_proc)
 
 puts 'my_inject Range'
-p(5..10).my_inject(1) { |x, y| x + y }
+puts((5..10).my_inject { |x, y| x + y })
 
 puts 'my_inject Array'
 p [5, 5, 7, 8].my_inject(1) { |x, y| x * y }
