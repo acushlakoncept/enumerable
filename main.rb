@@ -151,11 +151,7 @@ my_proc = proc { |i| i * i }
 [2, 5, 7, 4, 2].my_map(&my_proc)
 
 puts 'my_inject Range'
-<<<<<<< HEAD
 ((5..10).my_inject { |x, y| x + y })
-=======
-puts((5..10).my_inject { |x, y| x + y })
->>>>>>> 9ac0c0278e8dab7bc342ad6ee6fd0931b63c00e4
 
 puts 'my_inject Array'
 [5, 5, 7, 8].my_inject(1) { |x, y| x * y }
