@@ -2,7 +2,7 @@
 
 This is the first project that welcomes us challenges us into recreated our own enumerable methods for ruby this is the second Ruby section of the *Microverse Remote Software Development Curriculum*.
 
-Bellow are a list of methods we had to recreate.
+Below are a list of methods we had to recreate.
 
 ### Enumerable Methods List:
 
