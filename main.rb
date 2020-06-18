@@ -56,14 +56,9 @@ module Enumerable
     arr = self.class == Array ? self : to_a
     return arr.length unless block_given? || num
 
-    count = 0
-    if num
-      my_each { |item| count += 1 if item == num }
-      return count
-    end
+    return arr.my_select { |item| item == num }.length if num
 
-    my_each { |item| count += 1 if yield(item) }
-    count
+    arr.my_select { |item| yield(item) }.length
   end
 
   def my_map(proc = nil)
