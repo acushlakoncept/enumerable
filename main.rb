@@ -82,11 +82,11 @@ module Enumerable
     if num
       accumulator = num
       my_each do |item|
-        accumulator = yield(accumulator, item) 
+        accumulator = yield(accumulator, item)
       end
     else
       my_each do |item|
-        accumulator = yield(accumulator, item) 
+        accumulator = yield(accumulator, item)
       end
     end
 
@@ -128,4 +128,6 @@ end
 # (0..5).my_map { |i| i * i }
 # [2, 5, 7, 4, 2].my_map { |i| i + 8 }
 
-p (1..5).my_inject(1) { |result, element| result * element }
+# p (1..5).inject { |acc, el| acc  * el}
+
+p (0..5).my_inject(:+)
