@@ -32,30 +32,19 @@ module Enumerable
   end
 
   def my_all?(arg = nil)
-
-    if !block_given? && arg == nil 
-      my_each { |n| return false if n == nil || n == false}
+    if !block_given? && arg.nil?
+      my_each { |n| return false if n.nil? || n == false }
       return true
     end
 
-#     my_all? should be able to receive an optional argument. If the argument is a class, then it should return true if all members of the given enumerable are members of that class, otherwise it should return false. If the argument is a regex, then it should return true if all members of the enumerable matches the regex, otherwise it should return false. If the argument is any other pattern besides a class or regex, a similar logic holds.
-# Example
-
-# [1, 2, 3].my_all?(Integer) should return true
-# [1, 2, "a"].my_all?(Integer) should return false
-# ['dog', 'door'].my_all?(/d/) should return true
-# ['dog', 'door', 'ant'].my_all?(/d/) should return false
-# [2, 2, 2].my_all?(2) should return true
-# [1, 2, 3].my_all?(2) should return false
-
-    if !block_given? && arg != nil 
+    if !block_given? && !arg.nil?
       if arg.is_a? Class
         my_each { |n| return false if n.class != arg }
         return true
       end
 
       if arg.class == Regexp
-        my_each { |n| return false if !arg.match(n) }
+        my_each { |n| return false unless arg.match(n) }
         return true
       end
 
@@ -69,7 +58,13 @@ module Enumerable
     true
   end
 
-  def my_any?
+  #   When no block or argument is given to my_any? it should return true if there is at least one element in the given enumerable that is a truthy, otherwise, it should return false.
+  # example [1, 2, false].my_any? should return true and [nil, false nil].my_any? should return false.
+
+  # my_any? should be able to receive an optional argument. If the argument is a class, then it should return true if there is at least one member of the given enumerable that is a member of that class, otherwise it should return false. If the argument is a regex, then it should return true if there is at least one member of the enumerable that matches the regex, otherwise it should return false. If the argument is any other pattern besides a class or regex, a similar logic holds.
+  # Example
+
+  def my_any?(_arg = nil)
     return to_enum(:my_any?) unless block_given?
 
     my_each { |item| return true if yield(item) }
@@ -188,14 +183,20 @@ end
 # puts 'multiply_els'
 # multiply_els([2, 4, 5])
 
-p [2, 2, 3].my_all?(Integer)
-p [2, 2, 3].my_all?(2)
-p [2, 2, 2].my_all?(2)
-# p ["hello", "hi", "hey"].my_all?(/m/)
+# p [2, 2, 3].my_all?(Integer)
+# p [2, 2, 3].my_all?(2)
+# p [2, 2, 2].my_all?(2)
+# # p ["hello", "hi", "hey"].my_all?(/m/)
 
-p ['dog', 'door'].my_all?(/d/) #should return true
-p ['dog', 'door', 'ant'].my_all?(/d/) #should return false
+# p ['dog', 'door'].my_all?(/d/) #should return true
+# p ['dog', 'door', 'ant'].my_all?(/d/) #should return false
 
-# p [1, 2, 3, nil].my_all? 
-# p [2, 4, 6, 7, 8, 4].my_all? { |n| n > 2 }
+# # p [1, 2, 3, nil].my_all?
+# # p [2, 4, 6, 7, 8, 4].my_all? { |n| n > 2 }
 
+p [1, 2, 'a'].my_any?(Integer) # should return true
+p %w[a b a].my_any?(Integer) # should return false
+p %w[dog door ant].my_any?(/d/) # should return true
+p %w[hey book ant].my_any?(/d/) # should return false
+p [2, 2, 3].my_any?(2) # should return true
+p [1, 3, 3].my_any?(2) # should return false
