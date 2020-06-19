@@ -58,12 +58,6 @@ module Enumerable
     true
   end
 
-  #   When no block or argument is given to my_any? it should return true if there is at least one element in the given enumerable that is a truthy, otherwise, it should return false.
-  # example [1, 2, false].my_any? should return true and [nil, false nil].my_any? should return false.
-
-  # my_any? should be able to receive an optional argument. If the argument is a class, then it should return true if there is at least one member of the given enumerable that is a member of that class, otherwise it should return false. If the argument is a regex, then it should return true if there is at least one member of the enumerable that matches the regex, otherwise it should return false. If the argument is any other pattern besides a class or regex, a similar logic holds.
-  # Example
-
   def my_any?(arg = nil)
     if !block_given? && arg.nil?
       my_each { |n| return true if n.nil? || n == true }
@@ -89,12 +83,40 @@ module Enumerable
     false
   end
 
-  def my_none?
-    return to_enum(:my_none?) unless block_given?
+  def my_none?(arg = nil)
+    if !block_given? && arg.nil?
+      my_each { |n| return true if n }
+      return false
+    end
+
+    if !block_given? && !arg.nil?
+
+      if arg.is_a? Class
+        my_each { |n| return false if n.class == arg }
+        return true
+      end
+
+      if arg.class == Regexp
+        my_each { |n| return false if arg.match(n) }
+        return true
+      end
+
+      my_each { |n| return false if n == arg }
+      return true
+    end
 
     my_any? { |item| return false if yield(item) }
     true
   end
+
+# ["a", "b", "a"].my_none?(Integer) should return true
+# ["1",  "2",  "a"].my_none?(Integer) should return false
+# ['rot', 'not', 'ant'].my_none?(/d/) should return true
+# ['door', 'dog', 'ant'].my_none?(/d/) should return false
+# [1, 3, 3].my_none?(2) should return true
+# [1, 2, 3].my_none?(2) should return false
+
+
 
   def my_count(num = nil)
     arr = self.class == Array ? self : to_a
@@ -212,9 +234,18 @@ end
 # # p [1, 2, 3, nil].my_all?
 # # p [2, 4, 6, 7, 8, 4].my_all? { |n| n > 2 }
 
-p [1, 2, 'a'].my_any?(Integer) # should return true
-p %w[a b a].my_any?(Integer) # should return false
-p %w[dog door ant].my_any?(/d/) # should return true
-p %w[hey book ant].my_any?(/d/) # should return false
-p [2, 2, 3].my_any?(2) # should return true
-p [1, 3, 3].my_any?(2) # should return false
+# p [1, 2, 'a'].my_any?(Integer) # should return true
+# p %w[a b a].my_any?(Integer) # should return false
+# p %w[dog door ant].my_any?(/d/) # should return true
+# p %w[hey book ant].my_any?(/d/) # should return false
+# p [2, 2, 3].my_any?(2) # should return true
+# p [1, 3, 3].my_any?(2) # should return false
+
+p [1, 2, 3].my_none? #should return true
+p [nil, nil, false].my_none? #should return false
+p ["a", "b", "a"].my_none?(Integer) # should return true
+p [1,  2,  "a"].my_none?(Integer) # should return false
+p ['rot', 'not', 'ant'].my_none?(/d/) # should return true
+p ['door', 'dog', 'ant'].my_none?(/d/) # should return false
+p [1, 3, 3].my_none?(2) # should return true
+p [1, 2, 3].my_none?(2) # should return false
