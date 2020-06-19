@@ -53,7 +53,11 @@ module Enumerable
         my_each { |n| return false if n.class != arg }
         return true
       end
-      
+
+      if arg.class == Regexp
+        my_each { |n| return false if !arg.match(n) }
+        return true
+      end
 
       my_each { |n| return false if n != arg }
       return true
@@ -184,8 +188,13 @@ end
 # puts 'multiply_els'
 # multiply_els([2, 4, 5])
 
-# p [2, 2, 3].my_all?(Integer)
-p ["hello", "hi", "hey"].my_all?(/h/)
+p [2, 2, 3].my_all?(Integer)
+p [2, 2, 3].my_all?(2)
+p [2, 2, 2].my_all?(2)
+# p ["hello", "hi", "hey"].my_all?(/m/)
+
+p ['dog', 'door'].my_all?(/d/) #should return true
+p ['dog', 'door', 'ant'].my_all?(/d/) #should return false
 
 # p [1, 2, 3, nil].my_all? 
 # p [2, 4, 6, 7, 8, 4].my_all? { |n| n > 2 }
