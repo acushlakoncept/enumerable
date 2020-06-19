@@ -109,15 +109,6 @@ module Enumerable
     true
   end
 
-# ["a", "b", "a"].my_none?(Integer) should return true
-# ["1",  "2",  "a"].my_none?(Integer) should return false
-# ['rot', 'not', 'ant'].my_none?(/d/) should return true
-# ['door', 'dog', 'ant'].my_none?(/d/) should return false
-# [1, 3, 3].my_none?(2) should return true
-# [1, 2, 3].my_none?(2) should return false
-
-
-
   def my_count(num = nil)
     arr = self.class == Array ? self : to_a
     return arr.length unless block_given? || num
