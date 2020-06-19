@@ -64,8 +64,26 @@ module Enumerable
   # my_any? should be able to receive an optional argument. If the argument is a class, then it should return true if there is at least one member of the given enumerable that is a member of that class, otherwise it should return false. If the argument is a regex, then it should return true if there is at least one member of the enumerable that matches the regex, otherwise it should return false. If the argument is any other pattern besides a class or regex, a similar logic holds.
   # Example
 
-  def my_any?(_arg = nil)
-    return to_enum(:my_any?) unless block_given?
+  def my_any?(arg = nil)
+    if !block_given? && arg.nil?
+      my_each { |n| return true if n.nil? || n == true }
+      return false
+    end
+
+    if !block_given? && !arg.nil?
+      if arg.is_a? Class
+        my_each { |n| return true if n.class == arg }
+        return false
+      end
+
+      if arg.class == Regexp
+        my_each { |n| return true if arg.match(n) }
+        return false
+      end
+
+      my_each { |n| return true if n == arg }
+      return false
+    end
 
     my_each { |item| return true if yield(item) }
     false
