@@ -32,20 +32,32 @@ module Enumerable
   end
 
   def my_all?(arg = nil)
-    # return true if !&block && my_each { |n| n ? "truthy" : "falsy" }
-
-    # return to_enum(:my_all?) unless block_given?
-    # is_truthy = var ? "truthy" : "falsy"
-
-#     When no block or argument is given my_all? should return true when all the elements in the enum and truthy values and return false if at least one element in the collection is a falsy value.
-# example [1, 2, 3].my_all? should return true and [nil, 1, 2, 3].my_all? should return false.
 
     if !block_given? && arg == nil 
       my_each { |n| return false if n == nil || n == false}
       return true
     end
 
-    # return true unless block_given? || arg
+#     my_all? should be able to receive an optional argument. If the argument is a class, then it should return true if all members of the given enumerable are members of that class, otherwise it should return false. If the argument is a regex, then it should return true if all members of the enumerable matches the regex, otherwise it should return false. If the argument is any other pattern besides a class or regex, a similar logic holds.
+# Example
+
+# [1, 2, 3].my_all?(Integer) should return true
+# [1, 2, "a"].my_all?(Integer) should return false
+# ['dog', 'door'].my_all?(/d/) should return true
+# ['dog', 'door', 'ant'].my_all?(/d/) should return false
+# [2, 2, 2].my_all?(2) should return true
+# [1, 2, 3].my_all?(2) should return false
+
+    if !block_given? && arg != nil 
+      if arg.is_a? Class
+        my_each { |n| return false if n.class != arg }
+        return true
+      end
+      
+
+      my_each { |n| return false if n != arg }
+      return true
+    end
 
     my_each do |item|
       return false if yield(item) == false
@@ -172,6 +184,9 @@ end
 # puts 'multiply_els'
 # multiply_els([2, 4, 5])
 
-p [1, 2, 3, nil].my_all? 
-p [2, 4, 6, 7, 8, 4].my_all? { |n| n > 2 }
+# p [2, 2, 3].my_all?(Integer)
+p ["hello", "hi", "hey"].my_all?(/h/)
+
+# p [1, 2, 3, nil].my_all? 
+# p [2, 4, 6, 7, 8, 4].my_all? { |n| n > 2 }
 
