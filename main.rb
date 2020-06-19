@@ -140,7 +140,7 @@ module Enumerable
     end
     return accumulator
   end
-  
+
 end
 
 def multiply_els(arr)
@@ -240,3 +240,9 @@ puts 'my_inject Range'
 p ((5..10).my_inject(1) { |x, y| x + y })
 puts 'my_inject Array'
 p [5, 5, 7, 8].my_inject { |x, y| x * y }
+
+# p [1, 2, 3, 4].my_inject(10) { |accum, elem| accum + elem } # => 20
+# p [1, 2, 3, 4].my_inject { |accum, elem| accum + elem } # => 10
+# p [5, 1, 2].my_inject('+') # => 8
+# p (5..10).my_inject(2, :*) # should return 302400
+# p (5..10).my_inject(4) { |prod, n| prod * n } # should return 604800
