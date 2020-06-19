@@ -130,23 +130,17 @@ module Enumerable
     new_arr
   end
 
-  def my_inject(num = 0)
+  def my_inject(num = nil, sym = nil)
     return to_enum(:my_inject) unless block_given? || num
 
-    if num
-      accumulator = num
-      my_each do |item|
-        accumulator = yield(accumulator, item)
-      end
-      return accumulator
-    end
+    accumulator = num
 
-    sum = 0
     my_each do |item|
-      sum = yield(sum, item)
+      accumulator = accumulator.nil? ? item : yield(accumulator, item)
     end
-    sum
+    return accumulator
   end
+  
 end
 
 def multiply_els(arr)
@@ -232,11 +226,17 @@ end
 # p [2, 2, 3].my_any?(2) # should return true
 # p [1, 3, 3].my_any?(2) # should return false
 
-p [1, 2, 3].my_none? #should return true
-p [nil, nil, false].my_none? #should return false
-p ["a", "b", "a"].my_none?(Integer) # should return true
-p [1,  2,  "a"].my_none?(Integer) # should return false
-p ['rot', 'not', 'ant'].my_none?(/d/) # should return true
-p ['door', 'dog', 'ant'].my_none?(/d/) # should return false
-p [1, 3, 3].my_none?(2) # should return true
-p [1, 2, 3].my_none?(2) # should return false
+# p [1, 2, 3].my_none? # should return true
+# p [nil, nil, false].my_none? # should return false
+# p %w[a b a].my_none?(Integer) # should return true
+# p [1, 2, 'a'].my_none?(Integer) # should return false
+# p %w[rot not ant].my_none?(/d/) # should return true
+# p %w[door dog ant].my_none?(/d/) # should return false
+# p [1, 3, 3].my_none?(2) # should return true
+# p [1, 2, 3].my_none?(2) # should return false
+
+# p [3, 6, 10, 13].my_inject(:+)
+puts 'my_inject Range'
+p ((5..10).my_inject(1) { |x, y| x + y })
+puts 'my_inject Array'
+p [5, 5, 7, 8].my_inject { |x, y| x * y }
