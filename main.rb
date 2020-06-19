@@ -8,6 +8,7 @@ module Enumerable
       yield arr[counter]
       counter += 1
     end
+    arr
   end
 
   def my_each_with_index
@@ -19,6 +20,7 @@ module Enumerable
       yield(arr[counter], counter)
       counter += 1
     end
+    arr
   end
 
   def my_select
