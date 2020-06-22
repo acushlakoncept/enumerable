@@ -135,11 +135,21 @@ module Enumerable
 
     accumulator = num
 
+      if arg.is_a? Symbol
+        my_each do |item|
+          accumulator = accumulator.nil? ? item : yield(accumulator, item)
+        end
+        return accumulator
+      end
+        if !block_given? && !arg.nil?
+
     my_each do |item|
       accumulator = accumulator.nil? ? item : yield(accumulator, item)
-    end
+   
+  end
     return accumulator
   end
+
 
 end
 
