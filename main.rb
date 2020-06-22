@@ -111,29 +111,25 @@ module Enumerable
   end
 
   def my_inject(num = nil, sym = nil)
-    if !block_given? && (!num.nil? || !sym.nil?)
-      if num.is_a?(Symbol) || num.is_a?(String)
-        accumulator = nil
-        my_each do |item|
-          accumulator = accumulator.nil? ? item : accumulator.send(num, item)
-        end
-        return accumulator
+    if block_given?
+      accumulator = num
+      my_each do |item|
+        accumulator = accumulator.nil? ? item : yield(accumulator, item)
       end
-
-      if sym.is_a?(Symbol) || sym.is_a?(String)
-        accumulator = num
-        my_each do |item|
-          accumulator = accumulator.nil? ? item : accumulator.send(sym, item)
-        end
-        return accumulator
+      accumulator
+    elsif !num.nil? && (num.is_a?(Symbol) || num.is_a?(String))
+      accumulator = nil
+      my_each do |item|
+        accumulator = accumulator.nil? ? item : accumulator.send(num, item)
       end
+      accumulator
+    elsif !sym.nil? && (sym.is_a?(Symbol) || sym.is_a?(String))
+      accumulator = num
+      my_each do |item|
+        accumulator = accumulator.nil? ? item : accumulator.send(sym, item)
+      end
+      accumulator
     end
-
-    accumulator = num
-    my_each do |item|
-      accumulator = accumulator.nil? ? item : yield(accumulator, item)
-    end
-    accumulator
   end
 end
 
@@ -202,10 +198,10 @@ end
 # puts 'multiply_els'
 # multiply_els([2, 4, 5])
 
-p [2, 2, 3].my_all?(Integer)
-p [2, 2, 3].my_all?(2)
-p [2, 2, 2].my_all?(2)
-p %w[hello hi hey].my_all?(/m/)
+# p [2, 2, 3].my_all?(Integer)
+# p [2, 2, 3].my_all?(2)
+# p [2, 2, 2].my_all?(2)
+# p %w[hello hi hey].my_all?(/m/)
 
 # p ['dog', 'door'].my_all?(/d/) #should return true
 # p ['dog', 'door', 'ant'].my_all?(/d/) #should return false
@@ -235,8 +231,8 @@ p %w[hello hi hey].my_all?(/m/)
 # puts 'my_inject Array'
 # p [3, 6, 10].my_inject(1) { |sum, number| sum + number }
 
-# [1, 2, 3, 4].my_inject(10) { |accum, elem| accum + elem } # => 20
-# [1, 2, 3, 4].my_inject { |accum, elem| accum + elem } # => 10
-# [5, 1, 2].my_inject('+') # => 8
-# (5..10).my_inject(2, :*) # should return 302400
-# (5..10).my_inject(4) { |prod, n| prod * n } # should return 604800
+# p [1, 2, 3, 4].my_inject(10) { |accum, elem| accum + elem } # => 20
+# p [1, 2, 3, 4].my_inject { |accum, elem| accum + elem } # => 10
+# p [5, 1, 2].my_inject('+') # => 8
+# p (5..10).my_inject(2, :*) # should return 302400
+# p(5..10).my_inject(4) { |prod, n| prod * n } # should return 604800
