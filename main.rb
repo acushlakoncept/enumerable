@@ -138,7 +138,7 @@ end
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
 def multiply_els(arr)
-  arr.my_inject() { |result, element| result * element }
+  arr.my_inject { |result, element| result * element }
 end
 
 puts 'my_each Array'
