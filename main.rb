@@ -130,28 +130,25 @@ module Enumerable
     new_arr
   end
 
-  def my_inject(num = nil, _sym = nil)
-
-
-
-    if !block_given? && (!num.nil? || !_sym.nil?)
+  def my_inject(num = nil, sym = nil)
+    if !block_given? && (!num.nil? || !sym.nil?)
       if (num.is_a? Symbol) || (num.is_a? String)
         accumulator = nil
         my_each do |item|
           begin
             accumulator = accumulator.nil? ? item : accumulator.send(num, item)
-          rescue => exception
-            return "provide a valid expression"
+          rescue StandardError
+            return 'provide a valid expression'
           end
-        end     
+        end
         return accumulator
       end
-      
-      if (_sym.is_a? Symbol) || (_sym.is_a? String)
+
+      if (sym.is_a? Symbol) || (sym.is_a? String)
         accumulator = num
         my_each do |item|
-          accumulator = accumulator.nil? ? item : accumulator.send(_sym, item)
-        end     
+          accumulator = accumulator.nil? ? item : accumulator.send(sym, item)
+        end
         return accumulator
       end
     end
@@ -265,12 +262,12 @@ end
 
 # p [3, 6, 10, 13].my_inject(:+)
 puts 'my_inject Range'
-p (5..10).my_inject { |sum, n| sum + n } 
+p(5..10).my_inject { |sum, n| sum + n }
 puts 'my_inject Array'
-p [3, 6, 10].my_inject(1) {|sum, number| sum + number}
+p [3, 6, 10].my_inject(1) { |sum, number| sum + number }
 
-p [1, 2, 3, 4].my_inject(10) { |accum, elem| accum + elem } # => 20
-p [1, 2, 3, 4].my_inject { |accum, elem| accum + elem } # => 10
-p [5, 1, 2].my_inject('+') # => 8
-p (5..10).my_inject(2, :*) # should return 302400
-p (5..10).my_inject(4) { |prod, n| prod * n } # should return 604800
+[1, 2, 3, 4].my_inject(10) { |accum, elem| accum + elem } # => 20
+[1, 2, 3, 4].my_inject { |accum, elem| accum + elem } # => 10
+[5, 1, 2].my_inject('+') # => 8
+(5..10).my_inject(2, :*) # should return 302400
+(5..10).my_inject(4) { |prod, n| prod * n } # should return 604800
