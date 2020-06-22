@@ -130,17 +130,35 @@ module Enumerable
     new_arr
   end
 
-  def my_inject(num = nil, sym = nil)
-    return to_enum(:my_inject) unless block_given? || num
+  def my_inject(num = nil, _sym = nil)
+
+    if !block_given? && !num.nil?
+      if (num.is_a? Symbol) || (num.is_a? String)
+        accumulator = nil
+        my_each do |item|
+          begin
+            accumulator = accumulator.nil? ? item : accumulator.send(num, item)
+          rescue => exception
+            return "provide a valid expression"
+          end
+        end     
+        return accumulator
+      end
+    end
+
+    # return to_enum(:my_inject) unless block_given? || num
+
+    # if !num.nil? && num.is_a Symbol && !block_given?
+    #   # accumulator = accumulator ? item : accumulator.send(num, item)
+    #   puts 'hey truly I am a symbol'
+    # end
 
     accumulator = num
-
     my_each do |item|
       accumulator = accumulator.nil? ? item : yield(accumulator, item)
     end
-    return accumulator
+    accumulator
   end
-
 end
 
 def multiply_els(arr)
@@ -236,13 +254,14 @@ end
 # p [1, 2, 3].my_none?(2) # should return false
 
 # p [3, 6, 10, 13].my_inject(:+)
-puts 'my_inject Range'
-p ((5..10).my_inject(1) { |x, y| x + y })
-puts 'my_inject Array'
-p [5, 5, 7, 8].my_inject { |x, y| x * y }
+# puts 'my_inject Range'
+# p((5..10).my_inject(1) { |x, y| x + y })
+# puts 'my_inject Array'
+# p [5, 5, 7, 8].my_inject { |x, y| x * y }
 
-# p [5, 5, 7, 8]].my_inject(10) { |x, y| x + y } 
-# p [5, 5, 7, 8]].my_inject { |x, y| x + y } 
-# p [5, 5, 7, 8]].my_inject('+') 
-# p (5..10).my_inject(3, :*) 
+# p [5, 5, 7, 8]].my_inject(10) { |x, y| x + y }
+# p [5, 5, 7, 8]].my_inject { |x, y| x + y }
+p [5, 5, 7, 8].my_inject('thow')
+p [20, 5, 8].my_inject(:-)
+# p (5..10).my_inject(3, :*)
 # p (5..10).my_inject(5) { |x, y| x * y }
