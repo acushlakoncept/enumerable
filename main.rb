@@ -5,7 +5,7 @@ module Enumerable
     arr = self.class == Array ? self : to_a
     counter = 0
     while counter < arr.length
-      yield arr[counter]
+      yield(arr[counter])
       counter += 1
     end
     arr
@@ -32,54 +32,34 @@ module Enumerable
   end
 
   def my_all?(arg = nil)
-    if !block_given? && arg.nil?
+    if block_given?
+      my_each { |item| return false if yield(item) == false }
+      return true
+    elsif arg.nil?
       my_each { |n| return false if n.nil? || n == false }
-      return true
-    end
-
-    if !block_given? && !arg.nil?
-      if arg.is_a? Class
-        my_each { |n| return false if n.class != arg }
-        return true
-      end
-
-      if arg.class == Regexp
-        my_each { |n| return false unless arg.match(n) }
-        return true
-      end
-
+    elsif !arg.nil? && (arg.is_a? Class)
+      my_each { |n| return false if n.class != arg }
+    elsif !arg.nil? && arg.class == Regexp
+      my_each { |n| return false unless arg.match(n) }
+    else
       my_each { |n| return false if n != arg }
-      return true
-    end
-
-    my_each do |item|
-      return false if yield(item) == false
     end
     true
   end
 
   def my_any?(arg = nil)
-    if !block_given? && arg.nil?
+    if block_given?
+      my_each { |item| return true if yield(item) }
+      false
+    elsif arg.nil?
       my_each { |n| return true if n.nil? || n == true }
-      return false
-    end
-
-    if !block_given? && !arg.nil?
-      if arg.is_a? Class
-        my_each { |n| return true if n.class == arg }
-        return false
-      end
-
-      if arg.class == Regexp
-        my_each { |n| return true if arg.match(n) }
-        return false
-      end
-
+    elsif !arg.nil? && (arg.is_a? Class)
+      my_each { |n| return true if n.class == arg }
+    elsif !arg.nil? && arg.class == Regexp
+      my_each { |n| return true if arg.match(n) }
+    else
       my_each { |n| return true if n == arg }
-      return false
     end
-
-    my_each { |item| return true if yield(item) }
     false
   end
 
@@ -91,7 +71,7 @@ module Enumerable
 
     if !block_given? && !arg.nil?
 
-      if arg.is_a? Class
+      if arg.is_a?(Class)
         my_each { |n| return false if n.class == arg }
         return true
       end
@@ -132,7 +112,7 @@ module Enumerable
 
   def my_inject(num = nil, sym = nil)
     if !block_given? && (!num.nil? || !sym.nil?)
-      if (num.is_a? Symbol) || (num.is_a? String)
+      if num.is_a?(Symbol) || num.is_a?(String)
         accumulator = nil
         my_each do |item|
           accumulator = accumulator.nil? ? item : accumulator.send(num, item)
@@ -140,7 +120,7 @@ module Enumerable
         return accumulator
       end
 
-      if (sym.is_a? Symbol) || (sym.is_a? String)
+      if sym.is_a?(Symbol) || sym.is_a?(String)
         accumulator = num
         my_each do |item|
           accumulator = accumulator.nil? ? item : accumulator.send(sym, item)
@@ -222,10 +202,10 @@ end
 # puts 'multiply_els'
 # multiply_els([2, 4, 5])
 
-# p [2, 2, 3].my_all?(Integer)
-# p [2, 2, 3].my_all?(2)
-# p [2, 2, 2].my_all?(2)
-# p %w[hello hi hey].my_all?(/h/)
+p [2, 2, 3].my_all?(Integer)
+p [2, 2, 3].my_all?(2)
+p [2, 2, 2].my_all?(2)
+p %w[hello hi hey].my_all?(/m/)
 
 # p ['dog', 'door'].my_all?(/d/) #should return true
 # p ['dog', 'door', 'ant'].my_all?(/d/) #should return false
@@ -233,7 +213,7 @@ end
 # # p [1, 2, 3, nil].my_all?
 # # p [2, 4, 6, 7, 8, 4].my_all? { |n| n > 2 }
 
-p [1, 2, 'a'].my_any?(Integer) # should return true
+# p([1, 2, 'a'].my_any?(Integer)) # should return true
 # p %w[a b a].my_any?(Integer) # should return false
 # p %w[dog door ant].my_any?(/d/) # should return true
 # p %w[hey book ant].my_any?(/d/) # should return false
