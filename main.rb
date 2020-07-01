@@ -4,7 +4,10 @@ module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
-    arr = self.class == Array ? self : to_a
+    arr = self if self.class == Array
+    arr = to_a if self.class == Range
+    arr = flatten if self.class == Hash
+
     counter = 0
     while counter < arr.length
       yield(arr[counter])
@@ -16,7 +19,10 @@ module Enumerable
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
 
-    arr = self.class == Array ? self : to_a
+    arr = self if self.class == Array
+    arr = to_a if self.class == Range
+    arr = flatten if self.class == Hash
+    
     counter = 0
     while counter < arr.length
       yield(arr[counter], counter)
