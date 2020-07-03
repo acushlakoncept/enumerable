@@ -23,6 +23,8 @@ Below are a list of methods we had to recreate.
 
 ## Live Code
 [Solution](https://repl.it/@jacobrees24/enumerable#main.rb)
+[![Run on Repl.it](https://repl.it/badge/github/acushlakoncept/Enumerable)](https://repl.it/@Acushla/Enumerable)
+
 
 
 ## Getting Started
