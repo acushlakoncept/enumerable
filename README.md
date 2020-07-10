@@ -36,7 +36,7 @@ $ cd <folder>
 ```
 
 ```
-$ git clone https://github.com/jacobrees/Bubble-Sort.git
+$ git clone https://github.com/acushlakoncept/enumerable.git
 ```
 
 ## Authors
