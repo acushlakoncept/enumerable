@@ -197,6 +197,18 @@ describe '#my_inject' do
       expect(my_test).to eq(90)
     end
   end
+
+  context 'when a symbol is given as an argument' do
+    it 'returns the operation of the given symbol' do
+      expect(test_arr.my_inject(:+)).to eq(14)
+    end
+  end
+
+  context 'when a string is given as an argument' do
+    it 'returns the operation of the given string' do
+      expect(test_arr.my_inject("+")).to eq(14)
+    end
+  end
   
 end
 
