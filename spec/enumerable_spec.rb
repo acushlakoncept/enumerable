@@ -41,18 +41,51 @@ describe '#my_select' do
   end
 end
 
-describe '#my_all?' do
-  let(:test_arr) { [2, 5, 6, 7, 2, 3, 1, 2] }
+#[1, 2, 3].my_all? should return true and [nil, 1, 2, 3].my_all? should return false.
+# [1, 2, 3].my_all?(Integer) should return true
+# [1, 2, "a"].my_all?(Integer) should return false
+# ['dog', 'door'].my_all?(/d/) should return true
+# ['dog', 'door', 'ant'].my_all?(/d/) should return false
+# [2, 2, 2].my_all?(2) should return true
+# [1, 2, 3].my_all?(2) should return false
 
-  context 'where an argument is given' do
+describe '#my_all?' do
+  let(:test1) { [2, 5, 6, 7, 2, 3, 1, 2] }
+  let(:test2) { [nil, 1, 2, 3] }
+  let(:test3) { [1, 2, "a"] }
+  let(:test4) { ['dog', 'door'] }
+  let(:test5) { ['dog', 'door', 'ant'] }
+
+  context 'where value is given as argument' do
     it 'returns true or false base on arg given' do
-      expect(test_arr.my_all?(2)).to be(false)
+      expect(test1.my_all?(2)).to be(false)
+    end
+  end
+
+  context 'where Class is given as argument' do
+    it 'returns true or false base on arg given' do
+      expect(test1.my_all?(Integer)).to be(true)
+      expect(test3.my_all?(Integer)).to be(false)
+    end
+  end
+
+  context 'where Regex is given as argument' do
+    it 'returns true or false base on arg given' do
+      expect(test4.my_all?(/d/)).to be(true)
+      expect(test5.my_all?(/d/)).to be(false)
+    end
+  end
+
+  context 'where no block is given' do
+    it 'returns true or false base on condition given' do
+      expect(test1.my_all?).to be(true)
+      expect(test2.my_all?).to be(false)
     end
   end
 
   context 'where block is given' do
     it 'returns true or false base on condition given' do
-      expect(test_arr.my_all? { |x| x >= 1 }).to be(true)
+      expect(test1.my_all? { |x| x >= 1 }).to be(true)
     end
   end
 end
