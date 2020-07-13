@@ -57,16 +57,12 @@ $ gem install rspec
 - Twitter: [@acushlakoncept](https://twitter.com/acushlakoncept)
 - Linkedin: [acushlakoncept](https://www.linkedin.com/in/acushlakoncept/)
 
-👤 **Jacob Rees**
-
-- Github: [jacobrees](https://github.com/jacobrees)
-- Linkedin: [jacob-rees-a6507b1a6](https://www.linkedin.com/in/jacob-rees-a6507b1a6/)
 
 👤 **Elijah Ayandokun**
 
 - Github: [@elijahtobs](https://github.com/elijahtobs)
-- Linkedin: [Elijah Ayandokun](https://www.linkedin.com/in/ayandokunelijah/)
 - Twitter: [@ElijahTobs](https://twitter.com/ElijahTobs)
+- Linkedin: [Elijah Ayandokun](https://www.linkedin.com/in/ayandokunelijah/)
 
 
 ## 🤝 Contributing
