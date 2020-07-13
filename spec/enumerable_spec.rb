@@ -170,7 +170,6 @@ end
 
 describe '#my_map' do
   let(:test_arr) { [3, 5, 6] }
-  let(:test_range) { (1..5) }
 
   context 'Where an array and block is given' do
     let(:my_test) { [] }
@@ -189,4 +188,23 @@ describe '#my_map' do
   
 end
 
+describe '#my_inject' do
+  let(:test_arr) { [3, 5, 6] }
+  # let(:test_range) { (1..5) }
+
+  context 'Where an array is given' do
+    it 'returns a new array containing the values returned by the block' do
+      my_test = test_arr.my_inject { |x, y| x * y }
+      expect(my_test).to eq(90)
+    end
+  end
+
+  context "when the argument is passed a proc" do
+    it "should call the proc" do
+      new_proc = proc { |x| x * 2 }
+      expect(test_arr.my_map(&new_proc)).to eq([6, 10, 12]) 
+    end
+  end
+  
+end
 # --------------------------------------------------------

@@ -55,8 +55,8 @@ require_relative './lib/enumerable.rb'
 # puts 'my_inject Range'
 # ((5..10).my_inject { |x, y| x + y })
 
-# puts 'my_inject Array'
-# [5, 5, 7, 8].my_inject(1) { |x, y| x * y }
+puts 'my_inject Array'
+puts [2, 2, 3, 2].my_inject { |x, y| x * y }
 
 # puts 'multiply_els'
 # multiply_els([2, 4, 5])
@@ -65,4 +65,4 @@ require_relative './lib/enumerable.rb'
 # h.my_each { |x| pp x }
 # h.each { |x| pp x }
 
-puts [nil, false, nil].my_none?
+# puts [nil, false, nil].my_none?
