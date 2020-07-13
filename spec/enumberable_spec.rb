@@ -34,3 +34,10 @@ describe "#my_each_with_index" do
     expect(test_res).to eq([0, 1, 2, 3])
   end
 end
+
+describe "#my_select" do
+  let(:test_arr){[2,5,6,7,2,3,1,2]}
+  it 'returns a new array base on selected condition' do
+    expect(test_arr.my_select{ |x| x == 2}).to eq([2,2,2])
+  end
+end
