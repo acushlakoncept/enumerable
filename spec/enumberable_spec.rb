@@ -41,3 +41,19 @@ describe "#my_select" do
     expect(test_arr.my_select{ |x| x == 2}).to eq([2,2,2])
   end
 end
+
+describe "#my_all?" do
+  let(:test_arr){[2,5,6,7,2,3,1,2]}
+  
+  context 'where an argument is given' do
+    it 'returns true or false base on arg given' do
+      expect(test_arr.my_all?(2)).to be(false)
+    end
+  end
+
+  context 'where block is given' do
+    it 'returns true or false base on condition given' do
+      expect(test_arr.my_all? { |x| x >= 1 }).to be(true)
+    end
+  end
+end
