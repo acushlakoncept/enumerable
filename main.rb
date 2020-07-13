@@ -58,8 +58,8 @@ require_relative './lib/enumerable.rb'
 puts 'my_inject Array'
 puts [2, 2, 3, 2].my_inject { |x, y| x * y }
 
-# puts 'multiply_els'
-# multiply_els([2, 4, 5])
+puts 'multiply_els'
+puts multiply_els([2, 4, 5])
 
 # h = { 'player1' => 'Uduak', 'player2' => 'Elijah' }
 # h.my_each { |x| pp x }

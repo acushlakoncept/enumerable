@@ -190,7 +190,6 @@ end
 
 describe '#my_inject' do
   let(:test_arr) { [3, 5, 6] }
-  # let(:test_range) { (1..5) }
 
   context 'Where an array is given' do
     it 'returns a new array containing the values returned by the block' do
@@ -198,13 +197,16 @@ describe '#my_inject' do
       expect(my_test).to eq(90)
     end
   end
+  
+end
 
-  context "when the argument is passed a proc" do
-    it "should call the proc" do
-      new_proc = proc { |x| x * 2 }
-      expect(test_arr.my_map(&new_proc)).to eq([6, 10, 12]) 
-    end
+describe "#multiply_els" do
+  let(:my_test) { [2, 2, 3, 2] } 
+  it "should return the multiple of numbers in an array" do
+    expect(multiply_els(my_test)).to eq(24) 
   end
   
 end
+
+
 # --------------------------------------------------------
