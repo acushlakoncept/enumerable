@@ -149,10 +149,23 @@ describe '#my_none' do
   end
 end
 
+describe "#my_count" do
+  let(:test1) { [2, 5, 6, 7, 2, 3, 1, 2] }
+
+  context "where arguments are given" do
+    it "should return the number of arguments" do
+      expect(test1.my_count(2)).to eq(3) 
+    end
+  end
+  
+  context "where block is given" do
+    it "return the number of elements that matches the block condition" do
+      expect(test1.my_count { |x| x > 3 }).to eq(3)  
+    end
+    
+  end
+  
+  
+end
+
 # --------------------------------------------------------
-# [1, 2, "a"].my_any?(Integer) should return true
-# ["a",  "b",  "a"].my_any?(Integer) should return false
-# ['dog', 'door', 'ant'].my_any?(/d/) should return true
-# ['hey', 'book', 'ant'].my_any?(/d/) should return false
-# [2, 2, 3].my_any?(2) should return true
-# [1, 3, 3].my_any?(2) should return false
