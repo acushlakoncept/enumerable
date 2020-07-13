@@ -88,6 +88,7 @@ describe '#my_any' do
   let(:test3) { [nil, false, nil] }
   let(:test4) { %w[brad hood ladder] }
   let(:test5) { %w[dog door ant] }
+  let(:test6) { %w[a b c] }
 
   context 'where a value is given as an argument' do
     it 'returns true or false base on arg given' do
@@ -121,7 +122,6 @@ describe '#my_any' do
       expect(test3.my_any?).to be(false)
     end
   end
-  
 end
 
 describe '#my_none' do
@@ -143,31 +143,28 @@ describe '#my_none' do
     end
   end
 
-  context "where no block is given" do
-    it "returns true or false based on condition given" do
+  context 'where no block is given' do
+    it 'returns true or false based on condition given' do
       expect(test3.my_none?).to be(true)
       expect(test1.my_none?).to be(false)
     end
   end
 end
 
-describe "#my_count" do
+describe '#my_count' do
   let(:test1) { [2, 5, 6, 7, 2, 3, 1, 2] }
 
-  context "where arguments are given" do
-    it "should return the number of arguments" do
-      expect(test1.my_count(2)).to eq(3) 
+  context 'where arguments are given' do
+    it 'should return the number of arguments' do
+      expect(test1.my_count(2)).to eq(3)
     end
   end
-  
-  context "where block is given" do
-    it "return the number of elements that matches the block condition" do
-      expect(test1.my_count { |x| x > 3 }).to eq(3)  
+
+  context 'where block is given' do
+    it 'return the number of elements that matches the block condition' do
+      expect(test1.my_count { |x| x > 3 }).to eq(3)
     end
-    
   end
-  
-  
 end
 
 describe '#my_map' do
@@ -181,13 +178,12 @@ describe '#my_map' do
     end
   end
 
-  context "when the argument is passed a proc" do
-    it "should call the proc" do
+  context 'when the argument is passed a proc' do
+    it 'should call the proc' do
       new_proc = proc { |x| x * 2 }
-      expect(test_arr.my_map(&new_proc)).to eq([6, 10, 12]) 
+      expect(test_arr.my_map(&new_proc)).to eq([6, 10, 12])
     end
   end
-  
 end
 
 describe '#my_inject' do
@@ -199,16 +195,31 @@ describe '#my_inject' do
       expect(my_test).to eq(90)
     end
   end
-  
-end
 
-describe "#multiply_els" do
-  let(:my_test) { [2, 2, 3, 2] } 
-  it "should return the multiple of numbers in an array" do
-    expect(multiply_els(my_test)).to eq(24) 
+  context 'when a symbol is given as an argument' do
+    it 'returns the operation of the given symbol' do
+      expect(test_arr.my_inject(:+)).to eq(14)
+    end
   end
-  
+
+  context 'when a string is given as an argument' do
+    it 'returns the operation of the given string' do
+      expect(test_arr.my_inject('+')).to eq(14)
+    end
+  end
+
+  context 'when both initial value and symbol are given as an argument' do
+    it 'returns the operation of the given symbol plus value' do
+      expect(test_arr.my_inject(2, :+)).to eq(16)
+    end
+  end
 end
 
+describe '#multiply_els' do
+  let(:my_test) { [2, 2, 3, 2] }
+  it 'should return the multiple of numbers in an array' do
+    expect(multiply_els(my_test)).to eq(24)
+  end
+end
 
 # --------------------------------------------------------

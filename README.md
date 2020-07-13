@@ -39,6 +39,16 @@ $ cd <folder>
 $ git clone https://github.com/acushlakoncept/enumerable.git
 ```
 
+Testing
+
+To test the code, run `rspec` from root of the folder using terminal.
+> Rspec is used for the test.
+
+~~~bash
+$ gem install rspec
+~~~
+
+
 ## Authors
 
 👤 **Uduak Essien**
@@ -51,6 +61,12 @@ $ git clone https://github.com/acushlakoncept/enumerable.git
 
 - Github: [jacobrees](https://github.com/jacobrees)
 - Linkedin: [jacob-rees-a6507b1a6](https://www.linkedin.com/in/jacob-rees-a6507b1a6/)
+
+👤 **Elijah Ayandokun**
+
+- Github: [@elijahtobs](https://github.com/elijahtobs)
+- Linkedin: [Elijah Ayandokun](https://www.linkedin.com/in/ayandokunelijah/)
+- Twitter: [@ElijahTobs](https://twitter.com/ElijahTobs)
 
 
 ## 🤝 Contributing
