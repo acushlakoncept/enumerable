@@ -47,10 +47,12 @@ describe '#my_all?' do
   let(:test3) { [1, 2, 'a'] }
   let(:test4) { %w[dog door] }
   let(:test5) { %w[dog door ant] }
+  let(:test6) { [3, 3, 3, 3] }
 
   context 'where value is given as argument' do
     it 'returns true or false base on arg given' do
       expect(test1.my_all?(2)).to be(false)
+      expect(test6.my_all?(3)).to be(true)
     end
   end
 
@@ -78,6 +80,7 @@ describe '#my_all?' do
   context 'where block is given' do
     it 'returns true or false base on condition given' do
       expect(test1.my_all? { |x| x >= 1 }).to be(true)
+      expect(test1.my_all? { |x| x >= 4 }).to be(false)
     end
   end
 end
