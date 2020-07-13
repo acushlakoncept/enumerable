@@ -8,4 +8,9 @@ describe "#my_each" do
       expect(test_arr.my_each{|x| x }).to eq([3,5,6])
     end
   end
+  context "Where a range and block is given" do
+    it "should loop through the array" do
+      expect(test_range.my_each{|x| x }).to eq((1..5))
+    end
+  end
 end
