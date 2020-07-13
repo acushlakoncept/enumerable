@@ -25,3 +25,12 @@ describe "#my_each" do
   end
 
 end
+
+describe "#my_each_with_index" do
+  let(:test_arr){%w(my each with index)}
+  let(:test_res){[]}
+  it 'should return the index of the elements' do
+    test_arr.my_each_with_index{ |val, index| test_res << index }
+    expect(test_res).to eq([0, 1, 2, 3])
+  end
+end
