@@ -23,7 +23,7 @@ module Enumerable
     arr = self if self.class == Array
     arr = to_a if self.class == Range
     arr = flatten if self.class == Hash
-    
+
     counter = 0
     while counter < arr.length
       yield(arr[counter], counter)
