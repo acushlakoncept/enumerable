@@ -168,4 +168,25 @@ describe "#my_count" do
   
 end
 
+describe '#my_map' do
+  let(:test_arr) { [3, 5, 6] }
+  let(:test_range) { (1..5) }
+
+  context 'Where an array and block is given' do
+    let(:my_test) { [] }
+    it 'returns a new array containing of the values returned by the block' do
+      test_arr.my_map { |x| my_test << x * 2 }
+      expect(my_test).to eq([6, 10, 12])
+    end
+  end
+
+  context "when the argument is passed a proc" do
+    it "should call the proc" do
+      new_proc = proc { |x| x * 2 }
+      expect(test_arr.my_map(&new_proc)).to eq([6, 10, 12]) 
+    end
+  end
+  
+end
+
 # --------------------------------------------------------
