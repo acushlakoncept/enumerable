@@ -74,8 +74,8 @@ module Enumerable
 
   def my_none?(arg = nil)
     if !block_given? && arg.nil?
-      my_each { |n| return true if n }
-      return false
+      my_each { |n| return false if n }
+      return true
     end
 
     if !block_given? && !arg.nil?

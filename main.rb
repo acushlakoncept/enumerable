@@ -65,4 +65,4 @@ require_relative './lib/enumerable.rb'
 # h.my_each { |x| pp x }
 # h.each { |x| pp x }
 
-puts [nil, false, 'Uduak'].any?
+puts [nil, false, nil].my_none?
