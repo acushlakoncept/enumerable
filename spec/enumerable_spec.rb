@@ -41,20 +41,12 @@ describe '#my_select' do
   end
 end
 
-#[1, 2, 3].my_all? should return true and [nil, 1, 2, 3].my_all? should return false.
-# [1, 2, 3].my_all?(Integer) should return true
-# [1, 2, "a"].my_all?(Integer) should return false
-# ['dog', 'door'].my_all?(/d/) should return true
-# ['dog', 'door', 'ant'].my_all?(/d/) should return false
-# [2, 2, 2].my_all?(2) should return true
-# [1, 2, 3].my_all?(2) should return false
-
 describe '#my_all?' do
   let(:test1) { [2, 5, 6, 7, 2, 3, 1, 2] }
   let(:test2) { [nil, 1, 2, 3] }
-  let(:test3) { [1, 2, "a"] }
-  let(:test4) { ['dog', 'door'] }
-  let(:test5) { ['dog', 'door', 'ant'] }
+  let(:test3) { [1, 2, 'a'] }
+  let(:test4) { %w[dog door] }
+  let(:test5) { %w[dog door ant] }
 
   context 'where value is given as argument' do
     it 'returns true or false base on arg given' do
@@ -90,9 +82,9 @@ describe '#my_all?' do
   end
 end
 
-describe "#my_any" do
+describe '#my_any' do
   let(:test_arr) { [2, 5, 6, 7, 2, 3, 1, 2] }
-  let(:test2) { [1, 2, "a"] }
+  let(:test2) { [1, 2, 'a'] }
   context 'where a value is given as an argument' do
     it 'returns true or false base on arg given' do
       expect(test_arr.my_any?(9)).to be(false)
@@ -105,15 +97,14 @@ describe "#my_any" do
     end
   end
 
-  context "where a class is given as argument" do
-    it "should return true or false based on given arg" do
+  context 'where a class is given as argument' do
+    it 'should return true or false based on given arg' do
       expect(test2.my_any?(Integer)).to be(true)
     end
-    
   end
 end
 
-describe "#my_none" do
+describe '#my_none' do
   # let(:test_arr) { [2, 5, 6, 7, 2, 3, 1, 2] }
   # let(:test_arr) { (1..10) }
   let(:test_arr) { (1..10) }
@@ -130,7 +121,6 @@ describe "#my_none" do
     end
   end
 end
-
 
 # --------------------------------------------------------
 # [1, 2, "a"].my_any?(Integer) should return true
