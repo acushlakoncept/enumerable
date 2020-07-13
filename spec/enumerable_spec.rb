@@ -88,6 +88,7 @@ describe '#my_any' do
   let(:test3) { [nil, false, nil] }
   let(:test4) { %w[brad hood ladder] }
   let(:test5) { %w[dog door ant] }
+  let(:test6) { %w[a b c] }
 
   context 'where a value is given as an argument' do
     it 'returns true or false base on arg given' do
