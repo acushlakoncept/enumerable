@@ -61,6 +61,8 @@ require_relative './lib/enumerable.rb'
 # puts 'multiply_els'
 # multiply_els([2, 4, 5])
 
-h = { 'player1' => 'Uduak', 'player2' => 'Elijah' }
-h.my_each { |x| pp x }
-h.each { |x| pp x }
+# h = { 'player1' => 'Uduak', 'player2' => 'Elijah' }
+# h.my_each { |x| pp x }
+# h.each { |x| pp x }
+
+puts [nil, false, 'Uduak'].any?

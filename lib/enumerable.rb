@@ -61,7 +61,7 @@ module Enumerable
       my_each { |item| return true if yield(item) }
       false
     elsif arg.nil?
-      my_each { |n| return true if n.nil? || n == true }
+      my_each { |n| return true if n }
     elsif !arg.nil? && (arg.is_a? Class)
       my_each { |n| return true if n.class == arg }
     elsif !arg.nil? && arg.class == Regexp

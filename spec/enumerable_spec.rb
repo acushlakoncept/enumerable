@@ -83,25 +83,45 @@ describe '#my_all?' do
 end
 
 describe '#my_any' do
-  let(:test_arr) { [2, 5, 6, 7, 2, 3, 1, 2] }
-  let(:test2) { [1, 2, 'a'] }
+  let(:test1) { [2, 5, 6, 7, 2, 3, 1, 2] }
+  let(:test2) { [nil, 1, 2, 3] }
+  let(:test3) { [nil, false, nil] }
+  let(:test4) { %w[brad hood ladder] }
+  let(:test5) { %w[dog door ant] }
+
   context 'where a value is given as an argument' do
     it 'returns true or false base on arg given' do
-      expect(test_arr.my_any?(9)).to be(false)
+      expect(test1.my_any?(9)).to be(false)
     end
   end
 
   context 'where block is given' do
     it 'returns true or false base on condition given' do
-      expect(test_arr.my_any? { |x| x >= 5 }).to be(true)
+      expect(test1.my_any? { |x| x >= 5 }).to be(true)
     end
   end
 
   context 'where a class is given as argument' do
     it 'should return true or false based on given arg' do
-      expect(test2.my_any?(Integer)).to be(true)
+      expect(test1.my_any?(Integer)).to be(true)
+      expect(test6.my_any?(Integer)).to be(false)
     end
   end
+
+  context 'where Regex is given as argument' do
+    it 'returns true or false base on arg given' do
+      expect(test4.my_any?(/d/)).to be(true)
+      expect(test5.my_any?(/^d/)).to be(true)
+    end
+  end
+
+  context 'where no block is given' do
+    it 'returns true or false base on condition given' do
+      expect(test2.my_any?).to be(true)
+      expect(test3.my_any?).to be(false)
+    end
+  end
+  
 end
 
 describe '#my_none' do
