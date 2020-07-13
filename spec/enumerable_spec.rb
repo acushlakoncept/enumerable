@@ -93,18 +93,21 @@ describe '#my_any' do
   context 'where a value is given as an argument' do
     it 'returns true or false base on arg given' do
       expect(test1.my_any?(9)).to be(false)
+      expect(test1.my_any?(6)).to be(true)
     end
   end
 
   context 'where block is given' do
     it 'returns true or false base on condition given' do
       expect(test1.my_any? { |x| x >= 5 }).to be(true)
+      expect(test1.my_any? { |x| x > 8 }).to be(false)
     end
   end
 
   context 'where a class is given as argument' do
     it 'should return true or false based on given arg' do
       expect(test1.my_any?(Integer)).to be(true)
+      expect(test1.my_any?(String)).to be(false)
       expect(test6.my_any?(Integer)).to be(false)
     end
   end
@@ -112,7 +115,9 @@ describe '#my_any' do
   context 'where Regex is given as argument' do
     it 'returns true or false base on arg given' do
       expect(test4.my_any?(/d/)).to be(true)
+      expect(test6.my_any?(/e/)).to be(false)
       expect(test5.my_any?(/^d/)).to be(true)
+      expect(test5.my_any?(/^f/)).to be(false)
     end
   end
 
