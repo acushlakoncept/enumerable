@@ -209,6 +209,12 @@ describe '#my_inject' do
       expect(test_arr.my_inject("+")).to eq(14)
     end
   end
+
+  context 'when both initial value and symbol are given as an argument' do
+    it 'returns the operation of the given symbol plus value' do
+      expect(test_arr.my_inject(2, :+)).to eq(16)
+    end
+  end
   
 end
 
