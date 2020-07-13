@@ -132,12 +132,14 @@ describe '#my_none' do
   context 'where an argument is given' do
     it 'returns true or false base on arg given' do
       expect(test1.my_none?(9)).to be(true)
+      expect(test1.my_none?(5)).to be(false)
     end
   end
 
   context 'where block is given' do
     it 'returns true or false base on condition given' do
       expect(test1.my_none? { |x| x <= 10 }).to be(false)
+      expect(test1.my_none? { |x| x > 10 }).to be(true)
     end
   end
 
