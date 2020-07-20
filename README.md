@@ -36,8 +36,18 @@ $ cd <folder>
 ```
 
 ```
-$ git clone https://github.com/jacobrees/Bubble-Sort.git
+$ git clone https://github.com/acushlakoncept/enumerable.git
 ```
+
+Testing
+
+To test the code, run `rspec` from root of the folder using terminal.
+> Rspec is used for the test.
+
+~~~bash
+$ gem install rspec
+~~~
+
 
 ## Authors
 
@@ -47,10 +57,12 @@ $ git clone https://github.com/jacobrees/Bubble-Sort.git
 - Twitter: [@acushlakoncept](https://twitter.com/acushlakoncept)
 - Linkedin: [acushlakoncept](https://www.linkedin.com/in/acushlakoncept/)
 
-👤 **Jacob Rees**
 
-- Github: [jacobrees](https://github.com/jacobrees)
-- Linkedin: [jacob-rees-a6507b1a6](https://www.linkedin.com/in/jacob-rees-a6507b1a6/)
+👤 **Elijah Ayandokun**
+
+- Github: [@elijahtobs](https://github.com/elijahtobs)
+- Twitter: [@ElijahTobs](https://twitter.com/ElijahTobs)
+- Linkedin: [Elijah Ayandokun](https://www.linkedin.com/in/ayandokunelijah/)
 
 
 ## 🤝 Contributing
